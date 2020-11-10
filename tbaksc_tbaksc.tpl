@@ -13,5 +13,4 @@
     var jstpl_tbaksc_card = '<div class="tbaksc_card" id="tbaksc_card_${ID}">${ID}</div>';
 </script>
 
-
 {OVERALL_GAME_FOOTER}

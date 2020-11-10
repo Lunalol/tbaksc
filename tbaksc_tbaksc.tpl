@@ -1,44 +1,17 @@
 {OVERALL_GAME_HEADER}
 
-<!-- 
---------
--- BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
--- TBAKSC implementation : © <Your name here> <Your email address here>
--- 
--- This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
--- See http://en.boardgamearena.com/#!doc/Studio for more information.
--------
-
-    tbaksc_tbaksc.tpl
-    
-    This is the HTML template of your game.
-    
-    Everything you are writing in this file will be displayed in the HTML page of your game user interface,
-    in the "main game zone" of the screen.
-    
-    You can use in this template:
-    _ variables, with the format {MY_VARIABLE_ELEMENT}.
-    _ HTML block, with the BEGIN/END format
-    
-    See your "view" PHP file to check how to set variables and control blocks
-    
-    Please REMOVE this comment before publishing your game on BGA
--->
-
-
-This is your game interface. You can edit this HTML in your ".tpl" file.
-
-
+<div style='position:relative;display:flex;margin: 0 auto;'>
+    <div class="tbaksc_deck" id="tbaksc_deck_space}" style="width: {WIDTH}px;height: {HEIGHT}px;">tbaksc_deck_space</div>
+    <div class='tbaksc_board' id='tbaksc_board' style='grid-template-columns:repeat({WIDTHOFROWS}, {WIDTH}px);grid-template-rows: repeat({NUMBEROFROWS}, {HEIGHT}px'>
+	<!-- BEGIN tbaksc_space -->
+	<div class="tbaksc_space" id="tbaksc_space_{ID}" style="width: {WIDTH}px;height: {HEIGHT}px;"></div>
+	<!-- END tbaksc_space -->
+    </div>
+    <div class="tbaksc_deck" id="tbaksc_deck_space}" style="width: {WIDTH}px;height: {HEIGHT}px;">tbaksc_deck_space</div>
+</div>
 <script type="text/javascript">
+    var jstpl_tbaksc_card = '<div class="tbaksc_card" id="tbaksc_card_${ID}">${ID}</div>';
+</script>
 
-// Javascript HTML templates
-
-/*
-// Example:
-var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${MY_ITEM_ID}"></div>';
-
-*/
-
-</script>  
 
 {OVERALL_GAME_FOOTER}

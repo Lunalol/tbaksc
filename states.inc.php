@@ -1,4 +1,5 @@
 <?php
+
 $machinestates = array(
     1 => array(
 	'name' => 'gameSetup',
@@ -10,6 +11,7 @@ $machinestates = array(
     2 => array(
 	'name' => 'setup',
 	'type' => 'game',
+	'args' => 'argSetup',
 	'description' => clienttranslate('🌠🌠🌠 setup 🌠🌠🌠'),
 	'action' => 'stSetup',
 	'transitions' => array('startGame' => 10)

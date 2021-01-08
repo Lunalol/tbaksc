@@ -1,19 +1,20 @@
 <?php
+
 require_once( APP_BASE_PATH . "view/common/game.view.php" );
 
 class view_tbaksc_tbaksc extends game_view
 {
+
     function getGameName()
     {
 	return "tbaksc";
     }
+
     function build_page($viewArgs)
     {
 	$numberOfRows = $this->game->getGameStateValue('numberOfRows');
 	$widthOfRows = $this->game->getGameStateValue('widthOfRows');
 	//
-	$this->tpl['WIDTH'] = 280;
-	$this->tpl['HEIGHT'] = 200;
 	$this->tpl['NUMBEROFROWS'] = $numberOfRows;
 	$this->tpl['WIDTHOFROWS'] = $widthOfRows;
 	//
@@ -28,4 +29,5 @@ class view_tbaksc_tbaksc extends game_view
 	    }
 	}
     }
+
 }

@@ -1,12 +1,19 @@
-_div {
-    border-style: solid;
-    border-color: red;
-    border-width: 1px;
+:root {
+    --SCALE: 0.2;
+    --WIDTH: calc(var(--SCALE) * 1038px);
+    --HEIGHT: calc(var(--SCALE) * 747px);
+    --BACKGROUND-SIZE: calc(var(--SCALE) * 2550px)
 }
 
+.tbaksc
+{
+    position:relative;
+    display:flex;
+    justify-content: space-evenly;
+}
 .tbaksc_board
 {
-    margin: 0 auto;
+    position: relative;
     display: grid;
     padding: 25px;
     width: fit-content;
@@ -18,8 +25,9 @@ _div {
 
 .tbaksc_deck
 {
-    background-image: url('img/S1-1-8.jpg');
-    background-size: 685px;
+    position: relative;
+    width: var(--WIDTH);
+    height: var(--HEIGHT);
     background-color: black;
     border-style: solid;
     border-color: red;
@@ -28,8 +36,7 @@ _div {
 
 .tbaksc_space
 {
+    position: absolute;
     background-image: url('img/S1-1-8.jpg');
-    background-size: 685px;
-    background-color: black;
+    background-size: var(--BACKGROUND-SIZE);
 }
-

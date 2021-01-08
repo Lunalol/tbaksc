@@ -38,12 +38,31 @@ define(["dojo", "dojo/_base/declare", "ebg/core/gamegui", "ebg/counter"],
 		    //
 		    console.log("Ending game setup");
 		},
-		onEnteringState: function (stateName, args)
+		onEnteringState: function (stateName, state)
 		{
-		    console.log('Entering state: ' + stateName);
+		    console.log('Entering state: ' + stateName, state.args);
 		    switch (stateName)
 		    {
-			case 'dummmy':
+			case 'setup':
+			    var animations = [];
+			    for (var spaceCard of Object.values(state.args.spaceCards))
+			    {
+				var location = 'tbaksc_space_' + spaceCard.location;
+				var node = dojo.place(this.format_block('jstpl_tbaksc_space', {card_id: spaceCard.card_id}), 'tbaksc_deck_space');
+				this.placeOnObject(node, 'tbaksc_deck_space');
+				dojo.style(node, 'z-index', '100');
+				var animation = this.slideToObject(node, location, 250, 500);
+				animations.push(animation);
+				dojo.connect(animation, 'onEnd', dojo.hitch(this, function (node, location)
+				{
+				    this.attachToNewParent(node, location);
+				    dojo.style(node, 'z-index', '');
+				}, node, location));
+			    }
+			    dojo.fx.chain(animations).play();
+			    break;
+			case 'determinePlayerOrder':
+			    debugger;
 			    break;
 		    }
 		},
@@ -69,18 +88,13 @@ define(["dojo", "dojo/_base/declare", "ebg/core/gamegui", "ebg/counter"],
 		setupNotifications: function ()
 		{
 		    console.log('notifications subscriptions setup');
-
-		    // TODO: here, associate your game notifications with local methods
-
-		    // Example 1: standard notification handling
-		    // dojo.subscribe( 'cardPlayed', this, "notif_cardPlayed" );
-
-		    // Example 2: standard notification handling + tell the user interface to wait
-		    //            during 3 seconds after calling the method in order to let the players
-		    //            see what is happening in the game.
-		    // dojo.subscribe( 'cardPlayed', this, "notif_cardPlayed" );
-		    // this.notifqueue.setSynchronous( 'cardPlayed', 3000 );
-		    //
-		}
+		    dojo.subscribe('placeSpaceCard', this, "notif_placeSpaceCard");
+		    this.notifqueue.setSynchronous('placeSpaceCard', 1000);
+		},
+		notif_placeSpaceCard: function (notif)
+		{
+		    console.log(notif);
+		},
 	    });
-	});
+	}
+);

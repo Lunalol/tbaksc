@@ -21,17 +21,19 @@ define(["dojo", "dojo/_base/declare", "ebg/core/gamegui", "ebg/counter"],
 		    this.numberOfRows = parseInt(gamedatas.gameStates.numberOfRows);
 		    this.widthOfRows = parseInt(gamedatas.gameStates.widthOfRows);
 		    //
-		    for (let row = 0; row < this.numberOfRows; row++)
+		    var index = 0;
+		    for (var spaceCard of Object.values(gamedatas.board))
 		    {
-			for (let col = 0; col < this.widthOfRows; col++)
-			{
-			    let index = (row + this.turn) * this.widthOfRows + col;
-			    if (index < Object.keys(gamedatas.board).length)
-			    {
-				let card = gamedatas.board[index + 1];
-				console.log(row, col);
-			    }
-			}
+			var location = 'tbaksc_space_' + spaceCard.location_arg;
+//			var index = parseInt(spaceCard.type_arg);
+			var dx = -516 * (index % 2) * 0.2;
+			var dy = -744 * Math.floor(index / 2) * 0.2;
+			console.log(spaceCard, index, dx, dy);
+			var node = dojo.place(this.format_block('jstpl_tbaksc_space', {card_id: spaceCard.id, dx: dx, dy: dy}), 'tbaksc_deck_space');
+			this.placeOnObject(node, location);
+			dojo.style(node, 'z-index', '100');
+			index += 1;
+			if (index >= 8) index = 0;
 		    }
 		    //
 		    this.setupNotifications();
@@ -48,7 +50,7 @@ define(["dojo", "dojo/_base/declare", "ebg/core/gamegui", "ebg/counter"],
 			    for (var spaceCard of Object.values(state.args.spaceCards))
 			    {
 				var location = 'tbaksc_space_' + spaceCard.location;
-				var node = dojo.place(this.format_block('jstpl_tbaksc_space', {card_id: spaceCard.card_id}), 'tbaksc_deck_space');
+				var node = dojo.place(this.format_block('jstpl_tbaksc_space', {card_id: spaceCard.id}), 'tbaksc_deck_space');
 				this.placeOnObject(node, 'tbaksc_deck_space');
 				dojo.style(node, 'z-index', '100');
 				var animation = this.slideToObject(node, location, 250, 500);
@@ -62,7 +64,6 @@ define(["dojo", "dojo/_base/declare", "ebg/core/gamegui", "ebg/counter"],
 			    dojo.fx.chain(animations).play();
 			    break;
 			case 'determinePlayerOrder':
-			    debugger;
 			    break;
 		    }
 		},

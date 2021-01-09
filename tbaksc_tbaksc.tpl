@@ -10,7 +10,7 @@
     <div class="tbaksc_deck" id="tbaksc_deck_space"></div>
 </div>
 <script type="text/javascript">
-    var jstpl_tbaksc_space = '<div class="tbaksc_deck tbaksc_space" id="tbaksc_card_${card_id}"></div>';
+    var jstpl_tbaksc_space = '<div class="tbaksc_deck tbaksc_space" id="tbaksc_card_${card_id}", style="background-position:${dx}px ${dy}px;"></div>';
 </script>
 
 {OVERALL_GAME_FOOTER}
